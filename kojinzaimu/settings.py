@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'stdimage',
 
     'core',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +91,8 @@ DATABASES = {
     }
 }
 
+
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -142,3 +145,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'homepage'
+
+LOGIN_URL = 'login'
