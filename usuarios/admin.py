@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario
+from .models import Usuario, Banco, Carteira
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -15,6 +15,9 @@ campos.append(
 
 UserAdmin.fieldsets = tuple(campos)
 
+
+
+# Register your models here.
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
     model = Usuario
@@ -25,4 +28,11 @@ class UsuarioAdmin(UserAdmin):
     nome_completo.short_description = 'Nome completo'
 
 
-# Register your models here.
+@admin.register(Banco)
+class BancoAdmin(admin.ModelAdmin):
+    search_fields = ['nome']
+
+
+@admin.register(Carteira)
+class BancoAdmin(admin.ModelAdmin):
+    search_fields = ['usuario', 'banco']
