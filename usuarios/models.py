@@ -25,6 +25,7 @@ class Usuario(AbstractUser):
         default='usuarios/default.png'
     )
 
+    saldo_inicial = models.DecimalField(max_digits=15, decimal_places=2, default=0)
 
     class Meta:
         ordering = ('first_name', 'last_name')
