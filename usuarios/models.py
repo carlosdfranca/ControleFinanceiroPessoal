@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from stdimage.models import StdImageField
+from colorfield.fields import ColorField
+
 
 import uuid
 
@@ -89,3 +91,38 @@ class Carteira(models.Model):
 
     def __str__(self):
         return f'{self.usuario} - {self.banco}'
+    
+class Categorias(models.Model):
+    usuario = models.ForeignKey(
+        Usuario,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Usuario',
+        related_name = 'categoria_usuario',
+    )
+
+
+    TIPO_CHOICES = [
+        (1, 'Receita'),
+        (2, 'Despesa'),
+    ]
+
+    tipo_transacao = models.IntegerField(
+        choices=TIPO_CHOICES,
+    )
+
+    nome = models.CharField(
+        max_length = 50
+    )
+
+    cor = ColorField(default='#FF0000')
+
+
+    class Meta:
+        verbose_name = ('Categorias')
+        verbose_name_plural = ('Categorias')
+        ordering = ('usuario', 'nome')
+
+    def __str__(self):
+        return f'{self.usuario} / {self.tipo_transacao} - {self.nome}'
