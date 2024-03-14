@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'core',
     'usuarios',
+    'movimentacoes',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

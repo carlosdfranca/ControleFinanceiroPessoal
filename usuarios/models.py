@@ -60,7 +60,7 @@ class Banco(models.Model):
         ordering = ('nome',)
 
     def __str__(self):
-        return self.nome
+        return f'{self.nome}'
 
 
 
@@ -90,7 +90,7 @@ class Carteira(models.Model):
         ordering = ('usuario', 'banco')
 
     def __str__(self):
-        return f'{self.usuario} - {self.banco}'
+        return f'{self.banco}'
     
 class Categorias(models.Model):
     usuario = models.ForeignKey(
@@ -125,4 +125,4 @@ class Categorias(models.Model):
         ordering = ('usuario', 'nome')
 
     def __str__(self):
-        return f'{self.usuario} / {self.tipo_transacao} - {self.nome}'
+        return self.nome

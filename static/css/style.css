@@ -1236,3 +1236,11 @@ h6 {
   font-size: 13px;
   color:  #3b0e5c;
 }
+
+.movimentacao .despesa {
+  color: #f70202; /* Cor do texto vermelha para despesas */
+}
+
+.movimentacao .receita {
+  color: #008f1f; /* Cor do texto verde para receitas */
+}
