@@ -124,7 +124,7 @@
             
 
             <li class="nav-item">
-                <a class="nav-link {% if request.path != '/movimentacoes'  %}collapsed{% endif %} " href="{% url "movimentacoes" %}">
+                <a class="nav-link {% if request.path != '/movimentacoes/' and request.path != '/movimentacoes/receitas/' and request.path != '/movimentacoes/despesas/' %}collapsed{% endif %} " href="{% url "movimentacoes" %}">
                     <i class="bi bi-arrow-left-right"></i>
                     <span>Movimentacoes</span>
                 </a>

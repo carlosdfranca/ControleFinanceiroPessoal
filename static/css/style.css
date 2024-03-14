@@ -1244,3 +1244,18 @@ h6 {
 .movimentacao .receita {
   color: #008f1f; /* Cor do texto verde para receitas */
 }
+
+.movimentacoes .btn {
+  color: #7900cf;
+  transition-property: background-color, color;
+  transition-duration: 0.5s; /* Duração da transição */
+}
+
+.movimentacoes .btn:hover {
+  color: #ffffff;
+  background-color: #7900cf;
+}
+
+.movimentacao-date {
+  color: #7900cf;
+}
