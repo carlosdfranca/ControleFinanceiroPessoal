@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario, Banco, Carteira, Categorias
+from .models import Usuario, Carteira, Categorias
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -28,14 +28,10 @@ class UsuarioAdmin(UserAdmin):
     nome_completo.short_description = 'Nome completo'
 
 
-@admin.register(Banco)
-class BancoAdmin(admin.ModelAdmin):
-    search_fields = ['nome']
-
-
 @admin.register(Carteira)
 class BancoAdmin(admin.ModelAdmin):
-    search_fields = ['usuario', 'banco']
+    search_fields = ['usuario']
+    list_display = ['usuario', 'instituicao', 'tipo_conta', 'saldo_inicial']
 
 
 @admin.register(Categorias)
