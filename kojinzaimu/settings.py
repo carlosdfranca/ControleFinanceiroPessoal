@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'stdimage',
     'colorfield',
 
+    'core',
     'usuarios',
     'bancos',
     'movimentacoes',
