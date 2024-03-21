@@ -30,7 +30,7 @@ class CampoMonetario(models.DecimalField):
 # Create your models here.
 class Usuario(AbstractUser):
     imagem_perfil = StdImageField(
-        upload_to='get_file_path',
+        upload_to=get_file_path,
         variations={
             'medium': {
                 'width': 300,
@@ -97,7 +97,7 @@ class Carteira(models.Model):
         ordering = ('usuario', 'instituicao', 'tipo_conta')
 
     def __str__(self):
-        return f'{self.banco}'
+        return f'{self.instituicao} - {self.tipo_conta}'
     
 
 

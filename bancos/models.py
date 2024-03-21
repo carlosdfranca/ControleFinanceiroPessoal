@@ -41,4 +41,4 @@ class DadosInstitucionais(models.Model):
         ordering = ('categoria', 'nome')
 
     def __str__(self):
-        return f'{self.nome} - {self.categoria}'
+        return f'{self.nome}'

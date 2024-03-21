@@ -12,7 +12,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="#" rel="icon">
+    <link href="{% static 'img/logo.png' %}" rel="icon">
     <!-- <link href="{% static 'img/Logo Azul SIS.png' %}" rel="apple-touch-icon"> -->
 
     <!-- Google Fonts -->
@@ -51,8 +51,9 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="#" class="logo d-flex align-items-center">
-                <img src="#" alt="">
+            <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+                <img src="{% static 'img/logo.png' %}" alt="">
+                <span class="d-none d-lg-block">DuduNomiza</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
