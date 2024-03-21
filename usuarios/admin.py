@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Usuario, Carteira, Categorias
+from .models import Usuario, Carteira, Categoria, CartaoCredito
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -16,7 +16,6 @@ campos.append(
 UserAdmin.fieldsets = tuple(campos)
 
 
-
 # Register your models here.
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
@@ -31,10 +30,16 @@ class UsuarioAdmin(UserAdmin):
 @admin.register(Carteira)
 class BancoAdmin(admin.ModelAdmin):
     search_fields = ['usuario']
-    list_display = ['usuario', 'instituicao', 'tipo_conta', 'saldo_inicial']
+    list_display = ['usuario', 'descricao', 'instituicao', 'tipo_conta', 'saldo_inicial']
 
 
-@admin.register(Categorias)
-class CategoriasAdmin(admin.ModelAdmin):
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
     search_fields = ['usuario']
     list_display = ['usuario', 'tipo_transacao', 'nome', 'cor']
+
+
+@admin.register(CartaoCredito)
+class CartaoCreditoAdmin(admin.ModelAdmin):
+    search_fields = ['usuario']
+    list_display = ['usuario', 'descricao', 'carteira', 'bandeira']
