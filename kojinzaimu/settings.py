@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'colorfield',
 
     'usuarios',
+    'bancos',
+    'movimentacoes',
+    'planejamento',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

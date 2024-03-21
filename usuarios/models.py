@@ -17,16 +17,12 @@ STATUS_CHOICES = [
     (1, 'Ativo'),
 ]
 
-class CampoMonetario(models.Model):
-    valor = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,  
-        default=0,
-        verbose_name='valor'     
-    )
-
-    class Meta:
-        abstract = True
+class CampoMonetario(models.DecimalField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('max_digits', 10)
+        kwargs.setdefault('decimal_places', 2)
+        kwargs.setdefault('verbose_name', 'Valor')
+        super().__init__(*args, **kwargs)
 
 
 
@@ -74,6 +70,7 @@ class Carteira(models.Model):
         blank=True,
         limit_choices_to={'categoria': 2},
         verbose_name='Instituição Financeira',
+        related_name='carteira_instituicao',
     )
 
     descricao = models.CharField(max_length=255)
@@ -91,7 +88,7 @@ class Carteira(models.Model):
 
     status = models.IntegerField(
         choices=STATUS_CHOICES,
-        defalt=1,
+        default=1,
     )
 
     class Meta:
@@ -126,7 +123,7 @@ class Categoria(models.Model):
         choices=TIPO_TRANSACAO_CHOICES,
     )
 
-    status = models.IntegerChoices(
+    status = models.IntegerField(
         choices=STATUS_CHOICES,
         default=1,
     )
@@ -195,5 +192,5 @@ class CartaoCredito(models.Model):
 
     status = models.IntegerField(
         choices=STATUS_CHOICES,
-        defalt=1,
+        default=1,
     )

@@ -9,7 +9,7 @@ def get_file_path(_instance, filename):
     return filename
 
 # Create your models here.
-class DadosInstitucionais:
+class DadosInstitucionais(models.Model):
     nome = models.CharField(max_length=100)
 
     logo = StdImageField(
@@ -38,7 +38,7 @@ class DadosInstitucionais:
     class Meta:
         verbose_name = ('Dados Institucionais')
         verbose_name_plural = ('Dados Institucionais')
-        ordering = ('tipo', 'banco')
+        ordering = ('categoria', 'nome')
 
     def __str__(self):
         return f'{self.nome} - {self.categoria}'

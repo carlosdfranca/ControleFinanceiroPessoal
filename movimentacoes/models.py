@@ -7,16 +7,12 @@ STATUS_CHOICES = [
     (1, 'Ativo'),
 ]
 
-class CampoMonetario(models.Model):
-    valor = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,  
-        default=0,
-        verbose_name='Valor'     
-    )
-
-    class Meta:
-        abstract = True
+class CampoMonetario(models.DecimalField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('max_digits', 10)
+        kwargs.setdefault('decimal_places', 2)
+        kwargs.setdefault('verbose_name', 'Valor')
+        super().__init__(*args, **kwargs)
 
 
 # Create your models here.

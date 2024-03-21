@@ -8,17 +8,12 @@ STATUS_CHOICES = [
 ]
 
 
-class CampoMonetario(models.Model):
-    valor = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,  
-        default=0,
-        verbose_name='valor'     
-    )
-
-    class Meta:
-        abstract = True
-
+class CampoMonetario(models.DecimalField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('max_digits', 10)
+        kwargs.setdefault('decimal_places', 2)
+        kwargs.setdefault('verbose_name', 'Valor')
+        super().__init__(*args, **kwargs)
 
 # Create your models here.
 class Salario(models.Model):
@@ -40,7 +35,7 @@ class Salario(models.Model):
         verbose_name='Porcentagem da Economia'     
     )
 
-    status = models.IntegerChoices(
+    status = models.IntegerField(
         choices=STATUS_CHOICES,
         default=1,
     )
@@ -49,7 +44,7 @@ class Salario(models.Model):
     class Meta:
         verbose_name = ('Salario')
         verbose_name_plural = ('Salario')
-        ordering = ('usuario')
+        ordering = ('usuario', )
 
     def __str__(self):
         return f'{self.usuario}'
