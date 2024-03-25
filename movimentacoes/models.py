@@ -1,13 +1,6 @@
 from django.db import models
 from usuarios.models import Usuario, CartaoCredito, Carteira, Categoria
 
-def limitar_escolhas_carteira(instance):
-    return instance.limitar_escolhas()
-
-
-def limitar_escolhas_categoria(instance):
-    return instance.limitar_escolhas()
-
 STATUS_CHOICES = [
     (0, 'Inativo'),
     (1, 'Ativo'),
@@ -52,7 +45,6 @@ class Movimentacoes(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=limitar_escolhas_carteira,
         verbose_name='Carteira',
     )
 
@@ -61,7 +53,6 @@ class Movimentacoes(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=limitar_escolhas_categoria,
         verbose_name='Categoria',
     )
 
@@ -92,7 +83,6 @@ class credito(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_usuario,
         verbose_name='Cartão de Crédito',
     )
 
@@ -107,7 +97,6 @@ class credito(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_usuario,
         verbose_name='Categoria',
     )
 

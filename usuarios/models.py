@@ -162,19 +162,11 @@ class CartaoCredito(models.Model):
         verbose_name='Bandeira do cartão',
     )
 
-    def escolhas_carteira(self):
-        # Retorna um dicionário que limita as escolhas do campo carteira
-        if self.usuario:
-            return {'usuario': self.usuario}
-        else:
-            return {}
-
     carteira = models.ForeignKey(
         Carteira,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_carteira,
         verbose_name='Bandeira do cartão',
     )
 

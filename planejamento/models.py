@@ -70,20 +70,12 @@ class Categoria(models.Model):
         related_name = 'categoria_salario',
     )
 
-
-    def escolhas_categoria(self):
-        # Retorna um dicionário que limita as escolhas do campo carteira
-        if self.usuario:
-            return {'usuario': self.usuario}
-        else:
-            return {}
         
     categoria = models.ForeignKey(
         Categoria,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_categoria,
         verbose_name='Categoria',
     )
 

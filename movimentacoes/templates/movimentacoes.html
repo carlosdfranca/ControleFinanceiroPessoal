@@ -6,13 +6,6 @@
 
 {% block content %}
 
-<form id="paginationForm" method="get">
-    <select name="page" onchange="this.form.submit()">
-        {% for page_num in page_obj.paginator.page_range %}
-            <option value="{{ page_num }}" {% if page_num == page_obj.number %} selected {% endif %}>{{ page_num }}</option>
-        {% endfor %}
-    </select>
-</form>
 <!-- End Page Title -->
 
 <section class="section dashboard pt-4 movimentacoes">
@@ -21,12 +14,17 @@
             <div class="card">
                 <div class="card-body">
 
+                    
+
                     <div class="d-flex justify-content-center py-4">
-                        <button type="button" class="btn rounded-pill btn-lg"><i
-                                class="bi bi-chevron-left"></i></button>
-                        <h4 class="movimentacao-date p-2 m-2">{{ mes_ano_atual }}</h4>
-                        <button type="button" class="btn rounded-pill btn-lg"><i
-                                class="bi bi-chevron-right"></i></button>
+                        <form id="month-form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="month" value="{{ current_month }}">
+                            <input type="hidden" name="year" value="{{ current_year }}">
+                            <button type="submit" name="action" value="prev">Mês Anterior</button>
+                            <h4 class="movimentacao-date p-2 m-2">{{ mes_ano_atual }}</h4>
+                            <button type="submit" name="action" value="next">Próximo Mês</button>
+                        </form>
                     </div>
 
                     <!-- <div id="meses" class="collapse">
@@ -55,12 +53,8 @@
                                 <td>{{ movimentacao.descricao }}</td>
                                 <td>{{ movimentacao.categoria }}</td>
                                 <td>{{ movimentacao.carteira }}</td>
-                                <td class="{%if movimentacao.tipo == 2 %}despesa{%else%}receita{%endif%}">
-                                    {% if movimentacao.tipo == 2 %}
+                                <td class="{%if movimentacao.tipo_movimentacao == 2 %}despesa{%else%}receita{%endif%}">
                                     R$ {{ movimentacao.valor }}
-                                    {% else %}
-                                    R$ {{ movimentacao.valor }}
-                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}

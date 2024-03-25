@@ -51,12 +51,8 @@
                                 <td>{{ movimentacao.descricao }}</td>
                                 <td>{{ movimentacao.categoria }}</td>
                                 <td>{{ movimentacao.carteira }}</td>
-                                <td class="{%if movimentacao.tipo == 2 %}despesa{%else%}receita{%endif%}">
-                                    {% if movimentacao.tipo == 2 %}
+                                <td class="{%if movimentacao.tipo_movimentacao == 2 %}despesa{%else%}receita{%endif%}">
                                     R$ {{ movimentacao.valor }}
-                                    {% else %}
-                                    R$ {{ movimentacao.valor }}
-                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}
