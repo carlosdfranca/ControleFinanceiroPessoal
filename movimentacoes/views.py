@@ -1,39 +1,36 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from .models import Movimentacoes
 from datetime import datetime
 
 
 # Create your views here.
-class MovimentacoesView(LoginRequiredMixin, TemplateView):
+class MovimentacoesView(LoginRequiredMixin, ListView):
+    model = Movimentacoes
     template_name = 'movimentacoes.html'
+    context_object_name = 'page_obj'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        usuario = self.request.user
-        movimentacoes = Movimentacoes.objects.filter(usuario=usuario)
-        context['movimentacoes'] = movimentacoes
-        return context
+    def get_queryset(self):
+        return Movimentacoes.objects.all()
 
 
-class DespesasView(LoginRequiredMixin, TemplateView):
+class DespesasView(LoginRequiredMixin, ListView):
+    model = Movimentacoes
     template_name = 'despesas.html'
+    context_object_name = 'page_obj'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        usuario = self.request.user
-        movimentacoes = Movimentacoes.objects.filter(usuario=usuario, tipo_movimentacao=2)
-        context['movimentacoes'] = movimentacoes
-        return context
+    def get_queryset(self):
+        return Movimentacoes.objects.filter(tipo_movimentacao=2)
     
 
-class ReceitasView(LoginRequiredMixin, TemplateView):
+class ReceitasView(LoginRequiredMixin, ListView):
+    model = Movimentacoes
     template_name = 'receitas.html'
+    context_object_name = 'page_obj'
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        usuario = self.request.user
-        movimentacoes = Movimentacoes.objects.filter(usuario=usuario , tipo_movimentacao=1)
-        context['movimentacoes'] = movimentacoes
-        return context
+    def get_queryset(self):
+        return Movimentacoes.objects.filter(tipo_movimentacao=1)

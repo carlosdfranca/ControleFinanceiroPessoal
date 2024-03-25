@@ -1,6 +1,12 @@
 from django.db import models
 from usuarios.models import Usuario, CartaoCredito, Carteira, Categoria
 
+def limitar_escolhas_carteira(instance):
+    return instance.limitar_escolhas()
+
+
+def limitar_escolhas_categoria(instance):
+    return instance.limitar_escolhas()
 
 STATUS_CHOICES = [
     (0, 'Inativo'),
@@ -40,20 +46,13 @@ class Movimentacoes(models.Model):
     valor = CampoMonetario(verbose_name="Valor")
 
     data = models.DateField()
-
-    def escolhas_usuario(self):
-        # Retorna um dicionário que limita as escolhas do campo carteira
-        if self.usuario:
-            return {'usuario': self.usuario}
-        else:
-            return {}
-
+        
     carteira = models.ForeignKey(
         Carteira,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_usuario,
+        limit_choices_to=limitar_escolhas_carteira,
         verbose_name='Carteira',
     )
 
@@ -62,7 +61,7 @@ class Movimentacoes(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        limit_choices_to=escolhas_usuario,
+        limit_choices_to=limitar_escolhas_categoria,
         verbose_name='Categoria',
     )
 
@@ -72,8 +71,8 @@ class Movimentacoes(models.Model):
     )
 
     class Meta:
-        verbose_name = ('Crédito')
-        verbose_name_plural = ('Crédito')
+        verbose_name = ('Movimentações')
+        verbose_name_plural = ('Movimentações')
         ordering = ('usuario', 'carteira', 'categoria', 'data', 'tipo_movimentacao' , 'valor')
 
     def __str__(self):

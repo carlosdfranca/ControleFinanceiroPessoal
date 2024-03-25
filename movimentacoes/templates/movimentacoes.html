@@ -2,10 +2,17 @@
 
 {% load static %}
 
+{% block title %}Movimentações{% endblock %}
+
 {% block content %}
-<div class="pagetitle">
-    <h1>Movimentacoes</h1>
-</div>
+
+<form id="paginationForm" method="get">
+    <select name="page" onchange="this.form.submit()">
+        {% for page_num in page_obj.paginator.page_range %}
+            <option value="{{ page_num }}" {% if page_num == page_obj.number %} selected {% endif %}>{{ page_num }}</option>
+        {% endfor %}
+    </select>
+</form>
 <!-- End Page Title -->
 
 <section class="section dashboard pt-4 movimentacoes">
